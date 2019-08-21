@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+
+import com.example.cnplay.di.DaggerRecommendComponent;
+import com.example.cnplay.di.RecommendModule;
 import com.example.cnplay.ui.decoration.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +24,8 @@ import com.example.cnplay.presenter.contract.RecommendContract;
 import com.example.cnplay.ui.adapter.RecomendAppAdatper;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +47,8 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
     private RecomendAppAdatper mAdatper;
     private ProgressDialog mProgressDialog;
-    private RecommendContract.Presenter mPresenter;
+    @Inject
+    RecommendContract.Presenter mPresenter;
 
     @Nullable
     @Override
@@ -51,7 +57,9 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         unbinder = ButterKnife.bind(this, view);
 
         mProgressDialog = new ProgressDialog(getActivity());
-        mPresenter = new RecommendPresenter(this);
+//        mPresenter = new RecommendPresenter(this);
+
+        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this)).build().inject(this );
 
         initData();
 

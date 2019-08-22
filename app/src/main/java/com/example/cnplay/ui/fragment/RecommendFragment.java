@@ -1,23 +1,15 @@
 package com.example.cnplay.ui.fragment;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 
-import com.example.cnplay.AppApplication;
 import com.example.cnplay.di.component.AppComponent;
-import com.example.cnplay.di.component.DaggerAppComponent;
 import com.example.cnplay.di.component.DaggerRecommendComponent;
 import com.example.cnplay.di.module.RecommendModule;
+import com.example.cnplay.presenter.RecommendPresenter;
 import com.example.cnplay.ui.decoration.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.cnplay.R;
@@ -30,8 +22,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 
 /**
  * <pre>
@@ -40,44 +31,35 @@ import butterknife.Unbinder;
  *     desc:推荐  Fragment
  * </pre>
  */
-public class RecommendFragment extends Fragment implements RecommendContract.View {
+public class RecommendFragment extends BaseFragment<RecommendPresenter> implements RecommendContract.View {
 
 
     @BindView(R.id.recycle_view)
     RecyclerView recycleView;
-    Unbinder unbinder;
+
 
     private RecomendAppAdatper mAdatper;
     @Inject
     ProgressDialog mProgressDialog;
-    @Inject
-    RecommendContract.Presenter mPresenter;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recomend, container, false);
-        unbinder = ButterKnife.bind(this, view);
+    public int setLayout() {
+        return R.layout.fragment_recomend;
+    }
 
-//        mProgressDialog = new ProgressDialog(getActivity());
-//        mPresenter = new RecommendPresenter(this);
-
-
-//        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this)).build().inject(this );
+    @Override
+    public void setupActivityComponent(AppComponent appComponent) {
         DaggerRecommendComponent.builder()
-                .appComponent(((AppApplication) getActivity().getApplication()).getAppComponent())
+                .appComponent(appComponent)
                 .recommendModule(new RecommendModule(this)).build().inject(this);
-
-        initData();
-
-        return view;
     }
 
-    private void initData() {
-
+    @Override
+    public void init() {
         mPresenter.requestDatas();
-
     }
+
 
     private void initRecyclerView(List<AppInfo> datas) {
         //为RecyclerView 设置布局管理器
@@ -90,12 +72,6 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         recycleView.setAdapter(mAdatper);
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     @Override
     public void showResult(List<AppInfo> datas) {

@@ -5,25 +5,20 @@ import com.example.cnplay.bean.PageBean;
 import com.example.cnplay.data.RecommendModel;
 import com.example.cnplay.presenter.contract.RecommendContract;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecommendPresenter implements RecommendContract.Presenter {
+public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendContract.View> {
 
-
-    private RecommendModel mModel;
-
-    private RecommendContract.View mView;
-
-    public RecommendPresenter(RecommendContract.View view,RecommendModel model) {
-        this.mView = view;
-        this.mModel = model;
-//        mModel = new RecommendModel();
+    @Inject
+    public RecommendPresenter(RecommendModel model, RecommendContract.View view) {
+        super(model, view);
     }
 
 
-    @Override
     public void requestDatas() {
 
         mView.showLoading();

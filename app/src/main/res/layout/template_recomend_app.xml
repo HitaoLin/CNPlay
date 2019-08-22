@@ -13,9 +13,12 @@
         android:layout_alignParentLeft="true"/>
 
     <LinearLayout
+        android:id="@+id/linear_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/btn_dl"
         android:layout_toRightOf="@id/img_icon"
         android:orientation="vertical">
 
@@ -25,6 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="微信"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textColor="@color/black"
             android:textSize="20sp" />
 

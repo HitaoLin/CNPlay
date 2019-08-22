@@ -1,4 +1,4 @@
-package com.example.cnplay.http;
+package com.example.cnplay.data.http;
 
 import com.example.cnplay.bean.AppInfo;
 import com.example.cnplay.bean.PageBean;

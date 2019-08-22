@@ -7,8 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 
-import com.example.cnplay.di.DaggerRecommendComponent;
-import com.example.cnplay.di.RecommendModule;
+import com.example.cnplay.AppApplication;
+import com.example.cnplay.di.component.AppComponent;
+import com.example.cnplay.di.component.DaggerAppComponent;
+import com.example.cnplay.di.component.DaggerRecommendComponent;
+import com.example.cnplay.di.module.RecommendModule;
 import com.example.cnplay.ui.decoration.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.cnplay.R;
 import com.example.cnplay.bean.AppInfo;
-import com.example.cnplay.presenter.RecommendPresenter;
 import com.example.cnplay.presenter.contract.RecommendContract;
 import com.example.cnplay.ui.adapter.RecomendAppAdatper;
 
@@ -46,7 +48,8 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     Unbinder unbinder;
 
     private RecomendAppAdatper mAdatper;
-    private ProgressDialog mProgressDialog;
+    @Inject
+    ProgressDialog mProgressDialog;
     @Inject
     RecommendContract.Presenter mPresenter;
 
@@ -56,10 +59,14 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         View view = inflater.inflate(R.layout.fragment_recomend, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        mProgressDialog = new ProgressDialog(getActivity());
+//        mProgressDialog = new ProgressDialog(getActivity());
 //        mPresenter = new RecommendPresenter(this);
 
-        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this)).build().inject(this );
+
+//        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this)).build().inject(this );
+        DaggerRecommendComponent.builder()
+                .appComponent(((AppApplication) getActivity().getApplication()).getAppComponent())
+                .recommendModule(new RecommendModule(this)).build().inject(this);
 
         initData();
 

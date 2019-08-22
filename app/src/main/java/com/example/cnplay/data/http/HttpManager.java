@@ -1,8 +1,6 @@
-package com.example.cnplay.http;
+package com.example.cnplay.data.http;
 
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.SSLSocketFactory;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

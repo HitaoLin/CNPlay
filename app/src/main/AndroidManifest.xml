@@ -3,20 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cnplay">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".AppApplication"
         android:allowBackup="true"
+        android:appComponentFactory="aa"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:appComponentFactory"
-        android:appComponentFactory="aa"
-        android:name=".AppApplication">
-        <activity android:name=".ui.activtity.MainActivity">
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".ui.activtity.MainActivity"></activity>
+        <activity android:name=".ui.activtity.WelcomeActivity"
+            android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

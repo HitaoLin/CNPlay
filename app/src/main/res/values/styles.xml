@@ -26,4 +26,9 @@
         <item name="color">@android:color/white</item>
     </style>
 
+    <style name="NoTitle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

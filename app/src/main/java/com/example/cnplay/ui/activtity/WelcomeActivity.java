@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 
 import com.eftimoff.androipathview.PathView;
 import com.example.cnplay.R;
+import com.example.cnplay.common.Constant;
+import com.example.cnplay.common.util.ACache;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,12 +33,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 .delay(100)
                 .duration(5000)
                 .interpolator(new AccelerateDecelerateInterpolator())
-                .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
-                    @Override
-                    public void onAnimationEnd() {
-                        jump();
-                    }
-                })
+//                .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
+//                    @Override
+//                    public void onAnimationEnd() {
+//                        jump();
+//                    }
+//                })
                 .start();
 
         mPathView .useNaturalColors();
@@ -59,7 +61,15 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void jump() {
 
-        startActivity(new Intent(this,MainActivity.class));
+        String isShowGuide = ACache.get(this).getAsString(Constant.IS_SHOW_GUIDE);
+
+        //第一次启动进入引导页面
+        if (isShowGuide == null){
+            startActivity(new Intent(this,GuideActivity.class));
+        }else {
+            startActivity(new Intent(this,MainActivity.class));
+        }
+
         finish();
 
     }

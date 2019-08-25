@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activtity.GuideActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.example.cnplay.ui.widget.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ci_height="15dp"
+        app:ci_width="15dp"
+        app:ci_drawable="@color/white"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/indicator"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="立即体验"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_btn_hotpink"
+        android:visibility="gone"/>
+
+</RelativeLayout>

@@ -16,8 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".ui.activtity.MainActivity"></activity>
-        <activity android:name=".ui.activtity.WelcomeActivity"
+        <activity android:name=".ui.activtity.GuideActivity"
+            android:theme="@style/NoTitle"></activity>
+        <activity android:name=".ui.activtity.MainActivity" />
+        <activity
+            android:name=".ui.activtity.WelcomeActivity"
             android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
